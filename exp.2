@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Product Filter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .container {
+            border: 1px solid #ccc;
+            padding: 15px;
+            max-width: 500px;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+        }
+
+        select {
+            margin-left: 10px;
+            padding: 5px;
+        }
+
+        .product-list {
+            margin-top: 15px;
+        }
+
+        .product-item {
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin-bottom: 8px;
+            border-radius: 4px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Product List</h2>
+        <label for="category">Filter by Category:</label>
+        <select id="category">
+            <option value="all">All</option>
+            <option value="clothing">Clothing</option>
+            <option value="electronics">Electronics</option>
+            <option value="books">Books</option>
+        </select>
+
+        <div class="product-list" id="productList">
+            <div class="product-item" data-category="clothing">T-Shirt</div>
+            <div class="product-item" data-category="clothing">Jeans</div>
+            <div class="product-item" data-category="electronics">Headphones</div>
+            <div class="product-item" data-category="electronics">Smartphone</div>
+            <div class="product-item" data-category="books">Novel</div>
+            <div class="product-item" data-category="books">Cookbook</div>
+        </div>
+    </div>
+
+    <script>
+        const categorySelect = document.getElementById('category');
+        const products = document.querySelectorAll('.product-item');
+
+        categorySelect.addEventListener('change', function() {
+            const selectedCategory = this.value;
+
+            products.forEach(product => {
+                const productCategory = product.getAttribute('data-category');
+
+                if (selectedCategory === 'all' || selectedCategory === productCategory) {
+                    product.classList.remove('hidden');
+                } else {
+                    product.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
